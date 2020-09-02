@@ -19,4 +19,4 @@ Once that's done, restart your R session to make sure that the variables are loa
 
 You should then be able to launch the "data browser" from the addins menu.
 
-![preview](https://i.imgur.com/0ItFWcz.png)
+![preview](https://imgur.com/a/2SthEUo)

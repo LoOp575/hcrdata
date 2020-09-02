@@ -55,7 +55,6 @@ server <- function(input, output, session) {
       shiny::updateRadioButtons(session, "file",
                                 choices =
                                   dplyr::filter(idx, srcname == input$src, dsname == input$dataset) %>%
-                                  # dplyr::distinct(filename, filedesc) %>%
                                   dplyr::arrange(filedesc) %>%
                                   { purrr::set_names(.$filename, .$filedesc)} )
     }
