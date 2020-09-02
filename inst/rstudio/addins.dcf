@@ -1,0 +1,4 @@
+Name: Browse data
+Description: Retrieve data from different UNHCR data sources
+Binding: hcrbrowse
+Interactive: true
