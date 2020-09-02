@@ -21,7 +21,7 @@ ui <- miniUI::miniPage(
   miniUI::miniButtonBlock(shiny::actionButton("load", "Load data", class = "btn-primary")))
 
 server <- function(input, output, session) {
-  idx <- purrr::quietly(hcrindex)()$result
+  idx <- hcrindex()
 
   shiny::updateRadioButtons(session, "src",
                             choices =

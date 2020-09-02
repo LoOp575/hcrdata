@@ -19,7 +19,7 @@ hcrindex <- function(cache = TRUE) {
     fs::dir_create(fs::path_dir(indexfile))
     readr::write_csv(result, indexfile)
   } else {
-    result <- readr::read_csv(indexfile)
+    result <- purrr::quietly(readr::read_csv)(indexfile)$result
   }
 
   result
