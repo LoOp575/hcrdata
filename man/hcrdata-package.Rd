@@ -4,9 +4,16 @@
 \name{hcrdata-package}
 \alias{hcrdata}
 \alias{hcrdata-package}
-\title{hcrdata: What the Package Does (Title Case)}
+\title{hcrdata: Uniform Interface to UNHCR Data}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Add a more detailed description here...
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/galalH/hcrdata}
+  \item Report bugs at \url{https://github.com/galalH/hcrdata/issues}
+}
+
 }
 \keyword{internal}
