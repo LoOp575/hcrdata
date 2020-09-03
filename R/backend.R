@@ -44,16 +44,16 @@ hcrfetch <- function(src, dataset, file,
     stop("File not found")
   }
 
-  conn <-
-    switch(
-      stringr::str_match(url, "https://(.*).unhcr.org")[,2],
-      "kobo" = kobo.conn,
-      "mdl" = mdl.conn,
-      "ridl" = ridl.conn)
-
   fs::dir_create(fs::path_dir(path))
 
-  r <- conn() %>% rvest::jump_to(url, httr::write_disk(path, overwrite = TRUE))
+  r <-
+    switch(
+      src,
+      "kobo" = kobo.conn(),
+      "mdl" = mdl.conn(),
+      "ridl" = ridl.conn())
+
+  r <- r %>% rvest::jump_to(url, httr::write_disk(path, overwrite = TRUE))
 
   if(httr::http_error(r$response)) {
     stop("File download failed - ", httr::http_status(r)$message)
