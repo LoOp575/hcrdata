@@ -4,7 +4,8 @@ mdl.conn <- function() {
   r <- rvest::html_session("https://microdata.unhcr.org/index.php/auth/login")
   f <- rvest::html_form(r)[[1]] %>% rvest::set_values(email = creds[1], password = creds[2])
 
-  purrr::quietly(rvest::submit_form)(r, f %>% purrr::list_modify(url = r$url)) %>% pluck("result")
+  purrr::quietly(rvest::submit_form)(r, f %>% purrr::list_modify(url = r$url)) %>%
+    purrr::pluck("result")
 }
 
 mdl.index <- function() {
