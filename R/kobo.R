@@ -26,13 +26,13 @@ kobo.index <- function() {
 
   exports <-
     r$response %>%
-    httr::content() %>%
+    httr::content(simplifyVector = TRUE) %>%
     purrr::pluck("results") %>%
-    purrr::map_dfr(
-      ~tibble::tibble(
-        uid = stringr::str_match(purrr::pluck(., "data", "source"), ".*/(.*)/$")[,2],
-        url = purrr::pluck(., "result"),
-        filename = purrr::map_chr(fs::path_file(url), URLdecode))) %>%
+    filter(!is.na(result)) %>%
+    dplyr::transmute(
+      uid = stringr::str_match(purrr::pluck(., "data", "source"), ".*/(.*)/$")[,2],
+      url = result,
+      filename = purrr::map_chr(fs::path_file(url), URLdecode)) %>%
     dplyr::left_join(assets, by = "uid") %>%
     tidyr::replace_na(list(dsname = "==ARCHIVED EXPORTS=="))
 
