@@ -1,3 +1,13 @@
+#' @name empty.index
+#' @rdname empty.index
+#' @title  prepare an empty index
+#'
+#' @description  prepare an empty index
+
+#' @export empty.index
+#'
+#' @author Hisham Galal
+
 empty.index <- function() {
   tibble::tibble(
     srcname = character(), srcdesc = character(),
@@ -6,7 +16,15 @@ empty.index <- function() {
     url = character())
 }
 
-#' @export
+#' @name hcrindex
+#' @rdname hcrindex
+#' @title  fill  empty index
+#'
+#' @description  fill  empty index
+
+#' @export hcrindex
+#'
+#' @author Hisham Galal
 hcrindex <- function(cache = TRUE) {
   indexfile <- fs::path(rappdirs::user_cache_dir("hcrdata", "unhcr"), "index.csv")
 
@@ -25,7 +43,15 @@ hcrindex <- function(cache = TRUE) {
   result
 }
 
-#' @export
+#' @name hcrfetch
+#' @rdname hcrfetch
+#' @title  function to fetch data directly
+#'
+#' @description  function to fetch data directly
+
+#' @export hcrfetch
+#'
+#' @author Hisham Galal
 hcrfetch <- function(src, dataset, file,
                      path = here::here("data", dataset, file),
                      cache = TRUE) {

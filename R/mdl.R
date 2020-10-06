@@ -1,3 +1,12 @@
+#' @name mdl.conn
+#' @rdname mdl.conn
+#' @title  Connect to UNHCR mdl server http://microdata.unhcr.org
+#'
+#' @description  Connect to UNHCR mdl server using API key stored in your .Renviron file
+
+#' @export mdl.conn
+#'
+#' @author Hisham Galal
 mdl.conn <- function() {
   creds <- Sys.getenv("MDL_ACCESS_CREDS") %>% stringr::str_split(":") %>% purrr::as_vector()
 
@@ -8,6 +17,15 @@ mdl.conn <- function() {
     purrr::pluck("result")
 }
 
+#' @name mdl.index
+#' @rdname mdl.index
+#' @title  Get a list of projects in mdl http://microdata.unhcr.org
+#'
+#' @description  Get a list of projects in mdl
+
+#' @export mdl.index
+#'
+#' @author Hisham Galal
 mdl.index <- function() {
   r <- mdl.conn()
 

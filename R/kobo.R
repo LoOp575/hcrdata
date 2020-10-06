@@ -1,9 +1,28 @@
+#' @name kobo.conn
+#' @rdname kobo.conn
+#' @title  Connect to UNHCR kobo server: http://kobo.unhcr.org
+#'
+#' @description  Connect to UNHCR kobo server using API key stored in your .Renviron file
+
+#' @export kobo.conn
+#'
+#' @author Hisham Galal
+
 kobo.conn <- function() {
   rvest::html_session("https://kobo.unhcr.org/",
                       httr::add_headers(
                         Authorization = glue::glue("Token {Sys.getenv('KOBO_API_KEY')}")))
 }
 
+#' @name kobo.index
+#' @rdname kobo.index
+#' @title  Get a list of projects in kobo http://kobo.unhcr.org
+#'
+#' @description  Get a list of projects in kobo
+
+#' @export kobo.index
+#'
+#' @author Hisham Galal
 kobo.index <- function() {
   r <- kobo.conn()
 

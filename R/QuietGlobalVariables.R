@@ -1,0 +1,17 @@
+if(getRversion() >= "2.15.1")
+  utils::globalVariables(c(".",
+                           "srcname",
+                           "dsname",
+                           "filename",
+                           "srcname",
+                           "uid",
+                           ".",
+                           "status",
+                           "head",
+                           "name",
+                           "title",
+                           "resources",
+                           "candownload",
+                           "srcdesc",
+                           "dsdesc",
+                           "filedesc"))
