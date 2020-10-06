@@ -1,8 +1,26 @@
+#' @name ridl.conn
+#' @rdname ridl.conn
+#' @title  Connect to UNHCR ridl server http://ridl.unhcr.org
+#'
+#' @description  Connect to UNHCR ridl server using API key stored in your .Renviron file
+
+#' @export ridl.conn
+#'
+#' @author Hisham Galal
+
 ridl.conn <- function() {
   rvest::html_session("https://ridl.unhcr.org/",
                       httr::add_headers("X-CKAN-API-Key" = Sys.getenv("RIDL_API_KEY")))
 }
+#' @name ridl.index
+#' @rdname ridl.index
+#' @title  Get a list of projects in ridl http://ridl.unhcr.org
+#'
+#' @description  Get a list of projects in ridl
 
+#' @export ridl.index
+#'
+#' @author Hisham Galal
 ridl.index <- function() {
   r <- ridl.conn()
 

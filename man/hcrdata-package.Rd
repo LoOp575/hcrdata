@@ -6,13 +6,22 @@
 \alias{hcrdata-package}
 \title{hcrdata: Uniform Interface to UNHCR Data}
 \description{
-Add a more detailed description here...
+This addin is designed to conveniently wrappe calls for data API to be used by UNHCR analyst
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/galalH/hcrdata}
-  \item Report bugs at \url{https://github.com/galalH/hcrdata/issues}
+  \item \url{https://github.com/UNHCR-WEB/hcrdata}
+  \item Report bugs at \url{https://github.com/UNHCR-WEB/hcrdata/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Hisham Galal \email{galal@unhcr.org}
+
+Other contributors:
+\itemize{
+  \item Edouard Legoupil \email{legoupil@unhcr.org} [contributor]
 }
 
 }
