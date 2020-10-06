@@ -1,13 +1,13 @@
-# `hcrdata`
+# [hcrdata](https://unhcr-web.github.io/hcrdata/docs)
 
 An RStudio addin that wraps access to UNHCR data behind a uniform interface.
 
 It can be installed from github with `devtools::install_github("UNHCR-WEB/hcrdata")`.
 
 Currently supported data sources:
-* KoBoToolbox
-* Raw Internal Data Library
-* Microdata Library
+* __kobo__:UNHCR corporate server for survey data collection based on [Kobotoolbox](https://www.kobotoolbox.org/): [http://kobo.unhcr.org](http://kobo.unhcr.org)
+* __ridl__: Raw Internal Data Library, UNHCR internal instance of [CKAN data portal](https://ckan.org/) for data documentation: [http://ridl.unhcr.org](http://ridl.unhcr.org)
+* __mdl__: Microdata Library, UNHCR instance of [NADA](https://nada.ihsn.org/) for the publication of anonymized microdata: [http://microdata.unhcr.org](http://microdata.unhcr.org)
 
 With more to come (_popstats, rsq, etc..._).
 

@@ -69,15 +69,21 @@
 
 <div id="hcrdata" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#hcrdata" class="anchor"></a><code>hcrdata</code>
+<a href="#hcrdata" class="anchor"></a><a href="https://unhcr-web.github.io/hcrdata/docs">hcrdata</a>
 </h1></div>
 <p>An RStudio addin that wraps access to UNHCR data behind a uniform interface.</p>
 <p>It can be installed from github with <code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("UNHCR-WEB/hcrdata")</a></code>.</p>
 <p>Currently supported data sources:</p>
 <ul>
-<li>KoBoToolbox</li>
-<li>Raw Internal Data Library</li>
-<li>Microdata Library</li>
+<li>
+<strong>kobo</strong>:UNHCR corporate server for survey data collection based on <a href="https://www.kobotoolbox.org/">Kobotoolbox</a>: <a href="http://kobo.unhcr.org">http://kobo.unhcr.org</a>
+</li>
+<li>
+<strong>ridl</strong>: Raw Internal Data Library, UNHCR internal instance of <a href="https://ckan.org/">CKAN data portal</a> for data documentation: <a href="http://ridl.unhcr.org">http://ridl.unhcr.org</a>
+</li>
+<li>
+<strong>mdl</strong>: Microdata Library, UNHCR instance of <a href="https://nada.ihsn.org/">NADA</a> for the publication of anonymized microdata: <a href="http://microdata.unhcr.org">http://microdata.unhcr.org</a>
+</li>
 </ul>
 <p>With more to come (<em>popstats, rsq, etc…</em>).</p>
 </div>
