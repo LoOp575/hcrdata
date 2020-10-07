@@ -87,18 +87,28 @@
 </ul>
 <p>With more to come (<em>popstats, rsq, etc…</em>).</p>
 </div>
+<div id="use-cases" class="section level1">
+<h1 class="hasAnchor">
+<a href="#use-cases" class="anchor"></a>Use Cases</h1>
+<p>Using API calls in your analysis scripts can be quite convenient in multiple situations:</p>
+<ul>
+<li><p>During data collection, it is important to perform <a href="https://github.com/unhcr/HighFrequencyChecks">High frequency Check</a> in order to monitor the quality of the data collection process. Using the API call, you can further <strong>automate</strong> those checks;</p></li>
+<li><p>Once the survey is completed in KoboToolbox, data shall be extracted and then documented and uploaded in RIDL. Performing those tasks through scripts can be a lot quicker, specifically when a <strong>dataset with similar metadata shall be split</strong> between different data containers;</p></li>
+<li><p>When writing an analytic piece with Rmd, being able to include in the Rmd the exact location of the RIDL data container or Microdata catalog allows to increase <strong>reproducibility</strong>.</p></li>
+</ul>
+</div>
 <div id="usage" class="section level1">
 <h1 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h1>
 <p>The package expects to find your API keys / access credentials in environment variables. The easiest way to get them there and persist your settings is to store them in your <code>.Renviron</code> file which is automatically read by R on startup.</p>
-<p>Ypu can retrieve your <code>API key</code> for UNHCR kobo server in the <a href="https://kobo.unhcr.org/#/account-settings">account setting page</a> and in RIDL in your own <a href="https://ridl.unhcr.org/user/">user page</a>.</p>
+<p>You can retrieve your <code>API key</code> for UNHCR kobo server in the <a href="https://kobo.unhcr.org/#/account-settings">account setting page</a> and in RIDL in your own <a href="https://ridl.unhcr.org/user/">user page</a>.</p>
 <p>You can either edit directly the <code>.Renviron</code> file or access it by calling <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> (assuming you have the <code>usethis</code> package installed) and entering:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>KOBO_API_KEY=xxxxxxxxx</span>
 <span id="cb1-2"><a href="#cb1-2"></a>RIDL_API_KEY=xxxxxxxxx</span>
 <span id="cb1-3"><a href="#cb1-3"></a>MDL_ACCESS_CREDS=user<span class="op">:</span>password</span></code></pre></div>
 <p>Once that’s done, restart your R session to make sure that the variables are loaded.</p>
-<p>Then open a new R script within a RStudio project.</p>
-<p>You should then be able to launch the “data browser” with from the addins menu:</p>
+<p>Then open a new R script within a new RStudio project.</p>
+<p>You should then be able to launch the “data browser” within <a href="https://rstudio.github.io/rstudio-extensions/rstudio_addins.html">Rstudio addins</a> menu:</p>
 <ol>
 <li>select the source</li>
 <li>go to the dataset tab and select the project you want to pull data from</li>
@@ -106,21 +116,17 @@
 <li>press the load data button and the R statement to pull this file from your project will be automatically inserted in your blank R script tab</li>
 </ol>
 <p><img src="https://i.imgur.com/1hEUFkd.png" alt="preview"></p>
-<p>note that if you pull data from a kobo project, you can use a live data feed. This can be usefull for instance in the context of <a href="">High frequency Check</a></p>
-<p>in this case the following will conveniently pull directly the data as a data frame</p>
+<p>Note that data pulled <strong>live</strong> from Kobo server (<em>rather than exported to csv or excel at point in time</em>) is served as <code>json</code> file. In order to get transformed to a more convenient data frame, you can use the following script:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="va">data</span> <span class="op">&lt;-</span>
   <span class="fu">hcrdata</span><span class="fu">::</span><span class="fu"><a href="reference/hcrfetch.html">hcrfetch</a></span><span class="op">(</span>
     src <span class="op">=</span> <span class="st">"kobo"</span>,
-    dataset <span class="op">=</span> <span class="st">"High Frequency Survey - Remote or in-person interviews"</span>,
+    dataset <span class="op">=</span> <span class="st">"My kobo project"</span>,
     file <span class="op">=</span> <span class="st">"data.json"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"(\\/)"</span>, <span class="st">"."</span><span class="op">)</span><span class="op">)</span></pre></div>
-<p>Building this package <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code></p>
-<p><code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check(document = FALSE)</a></code></p>
-<p><code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code></p>
 </div>
 
   </div>

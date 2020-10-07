@@ -11,10 +11,24 @@ Currently supported data sources:
 
 With more to come (_popstats, rsq, etc..._).
 
+# Use Cases
+
+Using API calls in your analysis scripts can be quite convenient in multiple situations:
+
+ * During data collection, it is important to perform [High frequency Check](https://github.com/unhcr/HighFrequencyChecks) in order to monitor the quality of the data collection process. Using the API call, you can further __automate__ those checks;
+
+ * Once the survey is completed in KoboToolbox, data shall be extracted and then documented and uploaded in RIDL. Performing those tasks through scripts can be a lot quicker, specifically when a __dataset with similar metadata shall be split__ between different data containers;
+ 
+ * When writing an analytic piece with Rmd, being able to include in the Rmd the exact location of the RIDL data container or Microdata catalog allows to increase __reproducibility__.
+
+
+
+
 # Usage
+
 The package expects to find your API keys / access credentials in environment variables. The easiest way to get them there and persist your settings is to store them in your `.Renviron` file which is automatically read by R on startup. 
 
-Ypu can retrieve your `API key` for UNHCR kobo server in the [account setting page](https://kobo.unhcr.org/#/account-settings) and in RIDL in your own [user page](https://ridl.unhcr.org/user/).
+You can retrieve your `API key` for UNHCR kobo server in the [account setting page](https://kobo.unhcr.org/#/account-settings) and in RIDL in your own [user page](https://ridl.unhcr.org/user/).
 
 You can either edit directly the `.Renviron` file or access it by calling `usethis::edit_r_environ()` (assuming you have the `usethis` package installed) and entering:
 
@@ -24,9 +38,9 @@ You can either edit directly the `.Renviron` file or access it by calling `useth
 
 Once that's done, restart your R session to make sure that the variables are loaded.
 
-Then open a new R script within a RStudio project.
+Then open a new R script within a new RStudio project.
 
-You should then be able to launch the "data browser" with from the addins menu:
+You should then be able to launch the "data browser" within [Rstudio addins](https://rstudio.github.io/rstudio-extensions/rstudio_addins.html) menu:
 
  1. select the source
  2. go to the dataset tab and select the project you want to pull data from
@@ -36,14 +50,14 @@ You should then be able to launch the "data browser" with from the addins menu:
 
 ![preview](https://i.imgur.com/1hEUFkd.png)
 
-note that if you pull data from a kobo project, you can use a live data feed. This can be usefull for instance in the context of [High frequency Check]()
 
-in this case the following will conveniently pull directly the data as a data frame
+Note that data pulled __live__ from Kobo server (_rather than exported to csv or excel at point in time_) is served as `json` file. In order to get transformed to a more convenient data frame, you can use the following script: 
+
 ``` r
 data <-
   hcrdata::hcrfetch(
     src = "kobo",
-    dataset = "High Frequency Survey - Remote or in-person interviews",
+    dataset = "My kobo project",
     file = "data.json") %>%
   jsonlite::fromJSON() %>%
   purrr::pluck("results") %>%
@@ -51,9 +65,5 @@ data <-
   purrr::set_names(~stringr::str_replace_all(., "(\\/)", "."))
 ```
 
-Building this package
-`devtools::document()`
 
-`devtools::check(document = FALSE)`
 
-`pkgdown::build_site()`
