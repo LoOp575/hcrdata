@@ -11,6 +11,25 @@ Currently supported data sources:
 
 With more to come (_popstats, rsq, etc..._).
 
+> This package is part of `unhcrverse`, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:
+
+```r
+## Use UNHCR Open data
+remotes::install_github('unhcr/unhcrdatapackage')
+
+## Use API to connect to licensed / internal data source
+remotes::install_github('unhcr-web/hcrdata')
+
+## Perform High Frequency Check during data collection
+remotes::install_github('unhcr-web/HighFrequencyChecks')
+
+## Process data crunching for survey dataset
+remotes::install_github('unhcr/koboloadeR')
+
+## Use UNHCR template for reporting and writing stories
+remotes::install_github('unhcr-web/unhcRstyle')
+```
+
 # Use Cases
 
 Using API calls in your analysis scripts can be quite convenient in multiple situations:

@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -78,10 +78,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -121,7 +118,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-main-function" class="hasAnchor"><a href="#section-main-function" class="anchor"></a>Main Function</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -133,28 +130,23 @@
       <tr>
         
         <td>
-          <p><code><a href="empty.index.html">empty.index()</a></code> </p>
-        </td>
-        <td><p>prepare an empty index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hcrbrowse.html">hcrbrowse()</a></code> </p>
-        </td>
-        <td><p>Launch the addin interface</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="hcrfetch.html">hcrfetch()</a></code> </p>
         </td>
         <td><p>function to fetch data directly</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hcrindex.html">hcrindex()</a></code> </p>
-        </td>
-        <td><p>fill  empty index</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-connector-to-kobo" class="hasAnchor"><a href="#section-connector-to-kobo" class="anchor"></a>Connector to Kobo</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="kobo.conn.html">kobo.conn()</a></code> </p>
@@ -166,19 +158,20 @@
           <p><code><a href="kobo.index.html">kobo.index()</a></code> </p>
         </td>
         <td><p>Get a list of projects in kobo http://kobo.unhcr.org</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mdl.conn.html">mdl.conn()</a></code> </p>
-        </td>
-        <td><p>Connect to UNHCR mdl server http://microdata.unhcr.org</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mdl.index.html">mdl.index()</a></code> </p>
-        </td>
-        <td><p>Get a list of projects in mdl http://microdata.unhcr.org</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-connector-to-ridl" class="hasAnchor"><a href="#section-connector-to-ridl" class="anchor"></a>Connector to RIDL</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="ridl.conn.html">ridl.conn()</a></code> </p>
@@ -190,6 +183,62 @@
           <p><code><a href="ridl.index.html">ridl.index()</a></code> </p>
         </td>
         <td><p>Get a list of projects in ridl http://ridl.unhcr.org</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-connector-to-mdl" class="hasAnchor"><a href="#section-connector-to-mdl" class="anchor"></a>Connector to MDL</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="mdl.conn.html">mdl.conn()</a></code> </p>
+        </td>
+        <td><p>Connect to UNHCR mdl server http://microdata.unhcr.org</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mdl.index.html">mdl.index()</a></code> </p>
+        </td>
+        <td><p>Get a list of projects in mdl http://microdata.unhcr.org</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-addins-function" class="hasAnchor"><a href="#section-addins-function" class="anchor"></a>Addins Function</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="hcrindex.html">hcrindex()</a></code> </p>
+        </td>
+        <td><p>fill  empty index</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="empty.index.html">empty.index()</a></code> </p>
+        </td>
+        <td><p>prepare an empty index</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="hcrbrowse.html">hcrbrowse()</a></code> </p>
+        </td>
+        <td><p>Launch the addin interface</p></td>
       </tr><tr>
         
         <td>
