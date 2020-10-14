@@ -22,10 +22,10 @@ ridl.conn <- function() {
 #'
 #' @author Hisham Galal
 ridl.index <- function() {
-  r <- ridl.conn()
+  r <- purrr::quietly(ridl.conn)()$result
 
   if(httr::http_error(r$response)) {
-    warning("[INDEXER]: Failed to index RIDL - ", httr::http_status(r)$message, ". Skipping...",
+    warning("[INDEXER]: Failed to index RIDL. Skipping...",
             call. = FALSE, noBreaks. = TRUE)
     return(empty.index())
   }

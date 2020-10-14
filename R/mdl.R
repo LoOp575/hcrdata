@@ -27,17 +27,13 @@ mdl.conn <- function() {
 #'
 #' @author Hisham Galal
 mdl.index <- function() {
-  r <- mdl.conn()
-
-  if(httr::http_error(r$response)) {
-    warning("[INDEXER]: Failed to index MDL - ", httr::http_status(r)$message, ". Skipping...",
-            call. = FALSE, noBreaks. = TRUE)
-    return(empty.index())
-  }
+  r <- purrr::safely(mdl.conn)()$result
 
   r <- rvest::jump_to(r, "https://microdata.unhcr.org/index.php/auth/profile")
 
-  if(purrr::is_empty(rvest::html_node(r, "h2"))) {
+  if(is.null(httr::content(r$response)) || purrr::is_empty(rvest::html_node(r, "h2"))) {
+    warning("[INDEXER]: Failed to index MDL. Skipping...",
+            call. = FALSE, noBreaks. = TRUE)
     return(empty.index())
   }
 

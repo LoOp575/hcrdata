@@ -38,6 +38,8 @@ hcrindex <- function(cache = TRUE) {
     readr::write_csv(result, indexfile)
   } else {
     result <- purrr::quietly(readr::read_csv)(indexfile)$result
+    if (nrow(result) == 0)
+      hcrindex(FALSE)
   }
 
   result

@@ -9,7 +9,7 @@
 #' @author Hisham Galal
 
 kobo.conn <- function() {
-  rvest::html_session("https://kobo.unhcr.org/",
+  rvest::html_session("https://kobo.unhcr.org/token",
                       httr::add_headers(
                         Authorization = glue::glue("Token {Sys.getenv('KOBO_API_KEY')}")))
 }
@@ -24,10 +24,10 @@ kobo.conn <- function() {
 #'
 #' @author Hisham Galal
 kobo.index <- function() {
-  r <- kobo.conn()
+  r <- purrr::quietly(kobo.conn)()$result
 
-  if(httr::http_error(r$response)) {
-    warning("[INDEXER]: Failed to index KoBo - ", httr::http_status(r)$message, ". Skipping...",
+  if (httr::http_error(r$response)) {
+    warning("[INDEXER]: Failed to index KoBo. Skipping...",
             call. = FALSE, noBreaks. = TRUE)
     return(empty.index())
   }

@@ -102,5 +102,10 @@ server <- function(input, output, session) {
 #'
 #' @author Hisham Galal
 hcrbrowse <- function() {
+  idx <- hcrindex()
+
+  if (nrow(idx) == 0)
+    stop("No data could be retrieved. Please configure your access credentials.")
+
   shiny::runGadget(shiny::shinyApp(ui, server), viewer = shiny::paneViewer())
 }
