@@ -1,0 +1,37 @@
+title: hcrdata
+url: https://unhcr-web.github.io/hcrdata/docs/
+template:
+  params:
+    bootswatch: yeti
+
+navbar:
+  title: unhcRstyle
+  left:
+  - text: News
+    href: news/index.html
+  - text: Reference
+    href: reference/index.html
+
+reference:
+  - title: Main Function
+    contents:
+      - hcrfetch
+  - title: Connector to Kobo
+    contents:
+      - kobo.conn
+      - kobo.index
+  - title: Connector to RIDL
+    contents:
+      - ridl.conn
+      - ridl.index
+  - title: Connector to MDL
+    contents:
+      - mdl.conn
+      - mdl.index
+  - title: Addins Function
+    contents:
+      - hcrindex
+      - empty.index
+      - hcrbrowse
+      - server
+

@@ -20,6 +20,15 @@ ui <- miniUI::miniPage(
     id = "tab"),
   miniUI::miniButtonBlock(shiny::actionButton("load", "Load data", class = "btn-primary")))
 
+#' @name server
+#' @rdname server
+#' @title  Server part of the shiny interface
+#'
+#' @description   Server part of the shiny interface
+
+#' @export server
+#'
+#' @author Hisham Galal
 server <- function(input, output, session) {
   idx <- hcrindex()
 
@@ -83,7 +92,20 @@ server <- function(input, output, session) {
   })
 }
 
-#' @export
+#' @name hcrbrowse
+#' @rdname hcrbrowse
+#' @title  Launch the addin interface
+#'
+#' @description   Launch the addin interface
+
+#' @export hcrbrowse
+#'
+#' @author Hisham Galal
 hcrbrowse <- function() {
+  idx <- hcrindex()
+
+  if (nrow(idx) == 0)
+    stop("No data could be retrieved. Please configure your access credentials.")
+
   shiny::runGadget(shiny::shinyApp(ui, server), viewer = shiny::paneViewer())
 }

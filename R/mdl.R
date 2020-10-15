@@ -1,3 +1,12 @@
+#' @name mdl.conn
+#' @rdname mdl.conn
+#' @title  Connect to UNHCR mdl server http://microdata.unhcr.org
+#'
+#' @description  Connect to UNHCR mdl server using API key stored in your .Renviron file
+
+#' @export mdl.conn
+#'
+#' @author Hisham Galal
 mdl.conn <- function() {
   creds <- Sys.getenv("MDL_ACCESS_CREDS") %>% stringr::str_split(":") %>% purrr::as_vector()
 
@@ -8,18 +17,23 @@ mdl.conn <- function() {
     purrr::pluck("result")
 }
 
-mdl.index <- function() {
-  r <- mdl.conn()
+#' @name mdl.index
+#' @rdname mdl.index
+#' @title  Get a list of projects in mdl http://microdata.unhcr.org
+#'
+#' @description  Get a list of projects in mdl
 
-  if(httr::http_error(r$response)) {
-    warning("[INDEXER]: Failed to index MDL - ", httr::http_status(r)$message, ". Skipping...",
-            call. = FALSE, noBreaks. = TRUE)
-    return(empty.index())
-  }
+#' @export mdl.index
+#'
+#' @author Hisham Galal
+mdl.index <- function() {
+  r <- purrr::safely(mdl.conn)()$result
 
   r <- rvest::jump_to(r, "https://microdata.unhcr.org/index.php/auth/profile")
 
-  if(purrr::is_empty(rvest::html_node(r, "h2"))) {
+  if(is.null(httr::content(r$response)) || purrr::is_empty(rvest::html_node(r, "h2"))) {
+    warning("[INDEXER]: Failed to index MDL. Skipping...",
+            call. = FALSE, noBreaks. = TRUE)
     return(empty.index())
   }
 
