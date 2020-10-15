@@ -14,19 +14,15 @@ With more to come (_popstats, rsq, etc..._).
 > This package is part of `unhcrverse`, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:
 
 ```r
-## Use UNHCR Open data
-remotes::install_github('unhcr/unhcrdatapackage')
-
-## Use API to connect to licensed / internal data source
-remotes::install_github('unhcr-web/hcrdata')
-
-## Perform High Frequency Check during data collection
-remotes::install_github('unhcr-web/HighFrequencyChecks')
-
-## Process data crunching for survey dataset
-remotes::install_github('unhcr/koboloadeR')
-
-## Use UNHCR template for reporting and writing stories
+## Use UNHCR Open data - https://unhcr.github.io/unhcrdatapackage/docs/
+remotes::install_github('unhcr/unhcrdatapackage’)
+## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/
+remotes::install_github('unhcr-web/hcrdata’)
+## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/
+remotes::install_github('unhcr-web/HighFrequencyChecks’)
+## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/
+remotes::install_github('unhcr/koboloadeR’)
+## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/
 remotes::install_github('unhcr-web/unhcRstyle')
 ```
 
@@ -39,9 +35,6 @@ Using API calls in your analysis scripts can be quite convenient in multiple sit
  * Once the survey is completed in KoboToolbox, data shall be extracted and then documented and uploaded in RIDL. Performing those tasks through scripts can be a lot quicker, specifically when a __dataset with similar metadata shall be split__ between different data containers;
  
  * When writing an analytic piece with Rmd, being able to include in the Rmd the exact location of the RIDL data container or Microdata catalog allows to increase __reproducibility__.
-
-
-
 
 # Usage
 
@@ -86,3 +79,21 @@ data <-
 
 
 
+> This package is part of `unhcrverse`, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:
+
+```r
+## Use UNHCR Open data  - https://unhcr.github.io/unhcrdatapackage/docs/
+remotes::install_github('unhcr/unhcrdatapackage’)
+
+## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/
+remotes::install_github('unhcr-web/hcrdata’)
+
+## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/
+remotes::install_github('unhcr-web/HighFrequencyChecks’)
+
+## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/
+remotes::install_github('unhcr/koboloadeR’)
+
+## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/
+remotes::install_github('unhcr-web/unhcRstyle')
+```

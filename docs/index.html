@@ -86,21 +86,16 @@
 <blockquote>
 <p>This package is part of <code>unhcrverse</code>, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## Use UNHCR Open data</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'unhcr/unhcrdatapackage'</span><span class="op">)</span>
-
-<span class="co">## Use API to connect to licensed / internal data source</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'unhcr-web/hcrdata'</span><span class="op">)</span>
-
-<span class="co">## Perform High Frequency Check during data collection</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'unhcr-web/HighFrequencyChecks'</span><span class="op">)</span>
-
-<span class="co">## Process data crunching for survey dataset</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'unhcr/koboloadeR'</span><span class="op">)</span>
-
-<span class="co">## Use UNHCR template for reporting and writing stories</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'unhcr-web/unhcRstyle'</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Use UNHCR Open data - https://unhcr.github.io/unhcrdatapackage/docs/</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr/unhcrdatapackage’)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">-</span>web<span class="op">/</span>hcrdata’)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/HighFrequencyChecks’)</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="st">## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">/</span>koboloadeR’)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/unhcRstyle'</span>)</span></code></pre></div>
 </div>
 <div id="use-cases" class="section level1">
 <h1 class="hasAnchor">
@@ -142,6 +137,23 @@
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"(\\/)"</span>, <span class="st">"."</span><span class="op">)</span><span class="op">)</span></pre></div>
+<blockquote>
+<p>This package is part of <code>unhcrverse</code>, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## Use UNHCR Open data  - https://unhcr.github.io/unhcrdatapackage/docs/</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr/unhcrdatapackage’)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">-</span>web<span class="op">/</span>hcrdata’)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/HighFrequencyChecks’)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">/</span>koboloadeR’)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/unhcRstyle'</span>)</span></code></pre></div>
 </div>
 
   </div>
