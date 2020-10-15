@@ -55,7 +55,7 @@ hcrindex <- function(cache = TRUE) {
 #'
 #' @author Hisham Galal
 hcrfetch <- function(src, dataset, file,
-                     path = here::here("data", dataset, file),
+                     path = here::here("data-raw", dataset, file),
                      cache = TRUE) {
   if(cache && fs::file_exists(path)) {
     return(path)
