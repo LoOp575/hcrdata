@@ -81,7 +81,7 @@ hcrfetch <- function(src, dataset, file,
       "mdl" = mdl.conn(),
       "ridl" = ridl.conn())
 
-  r <- r %>% rvest::jump_to(url, httr::write_disk(path, overwrite = TRUE))
+  r <- r %>% rvest::session_jump_to(url, httr::write_disk(path, overwrite = TRUE))
 
   if(httr::http_error(r$response)) {
     stop("File download failed - ", httr::http_status(r)$message)
