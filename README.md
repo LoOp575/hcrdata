@@ -11,20 +11,7 @@ Currently supported data sources:
 
 With more to come (_popstats, rsq, etc..._).
 
-> This package is part of `unhcrverse`, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:
 
-```r
-## Use UNHCR Open data - https://unhcr.github.io/unhcrdatapackage/docs/
-remotes::install_github('unhcr/unhcrdatapackage’)
-## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/
-remotes::install_github('unhcr-web/hcrdata’)
-## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/
-remotes::install_github('unhcr-web/HighFrequencyChecks’)
-## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/
-remotes::install_github('unhcr/koboloadeR’)
-## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/
-remotes::install_github('unhcr-web/unhcRstyle')
-```
 
 # Use Cases
 
