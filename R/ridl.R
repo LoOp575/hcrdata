@@ -59,7 +59,7 @@ ridl.index <- function() {
     purrr::pluck("result") %>%
     dplyr::pull(id) %>%
     purrr::map_dfr(~rvest::session_jump_to(r, glue::glue("/api/3/action/package_search?q=owner_org:{.}&rows=1000")) %>%
-                     get_resources())
+                     purrr::possibly(get_resources, tibble::tibble())())
 
   dplyr::bind_rows(private, public) %>% dplyr::distinct()
 }

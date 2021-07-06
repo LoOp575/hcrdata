@@ -47,7 +47,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/UNHCR-WEB/hcrdata/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -100,9 +100,9 @@
 <p>The package expects to find your API keys / access credentials in environment variables. The easiest way to get them there and persist your settings is to store them in your <code>.Renviron</code> file which is automatically read by R on startup.</p>
 <p>You can retrieve your <code>API key</code> for UNHCR kobo server in the <a href="https://kobo.unhcr.org/#/account-settings">account setting page</a> and in RIDL in your own <a href="https://ridl.unhcr.org/user/">user page</a>.</p>
 <p>You can either edit directly the <code>.Renviron</code> file or access it by calling <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> (assuming you have the <code>usethis</code> package installed) and entering:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>KOBO_API_KEY=xxxxxxxxx</span>
-<span id="cb1-2"><a href="#cb1-2"></a>RIDL_API_KEY=xxxxxxxxx</span>
-<span id="cb1-3"><a href="#cb1-3"></a>MDL_ACCESS_CREDS=user<span class="op">:</span>password</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>KOBO_API_KEY<span class="ot">=</span>xxxxxxxxx</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>RIDL_API_KEY<span class="ot">=</span>xxxxxxxxx</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>MDL_ACCESS_CREDS<span class="ot">=</span>user<span class="sc">:</span>password</span></code></pre></div>
 <p>Once that’s done, restart your R session to make sure that the variables are loaded.</p>
 <p>Then open a new R script within a new RStudio project.</p>
 <p>You should then be able to launch the “data browser” within <a href="https://rstudio.github.io/rstudio-extensions/rstudio_addins.html">Rstudio addins</a> menu:</p>
@@ -114,8 +114,8 @@
 </ol>
 <p><img src="https://i.imgur.com/1hEUFkd.png" alt="preview"></p>
 <p>Note that data pulled <strong>live</strong> from Kobo server (<em>rather than exported to csv or excel at point in time</em>) is served as <code>json</code> file. In order to get transformed to a more convenient data frame, you can use the following script:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">data</span> <span class="op">&lt;-</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span>
   <span class="fu">hcrdata</span><span class="fu">::</span><span class="fu"><a href="reference/hcrfetch.html">hcrfetch</a></span><span class="op">(</span>
     src <span class="op">=</span> <span class="st">"kobo"</span>,
     dataset <span class="op">=</span> <span class="st">"My kobo project"</span>,
@@ -123,24 +123,24 @@
   <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"(\\/)"</span>, <span class="st">"."</span><span class="op">)</span><span class="op">)</span></pre></div>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"(\\/)"</span>, <span class="st">"."</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <blockquote>
 <p>This package is part of <code>unhcrverse</code>, a set of packages to ease the production of statistical evidence and data stories. You can install them all with the following:</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## Use UNHCR Open data  - https://unhcr.github.io/unhcrdatapackage/docs/</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr/unhcrdatapackage’)</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">-</span>web<span class="op">/</span>hcrdata’)</span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/HighFrequencyChecks’)</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="st">## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="st">remotes::install_github('</span>unhcr<span class="op">/</span>koboloadeR’)</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'unhcr-web/unhcRstyle'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Use UNHCR Open data  - https://unhcr.github.io/unhcrdatapackage/docs/</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'unhcr/unhcrdatapackage’)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">## API to connect to internal data source - https://unhcr-web.github.io/hcrdata/docs/</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">remotes::install_github('</span>unhcr<span class="sc">-</span>web<span class="sc">/</span>hcrdata’)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Perform High Frequency Check https://unhcr.github.io/HighFrequencyChecks/docs/</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'unhcr-web/HighFrequencyChecks’)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">## Process data crunching for survey dataset - https://unhcr.github.io/koboloadeR/docs/</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">remotes::install_github('</span>unhcr<span class="sc">/</span>koboloadeR’)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Use UNHCR graphical template- https://unhcr-web.github.io/unhcRstyle/docs/</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'unhcr-web/unhcRstyle'</span>)</span></code></pre></div>
 </div>
 
   </div>

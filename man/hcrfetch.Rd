@@ -8,7 +8,7 @@ hcrfetch(
   src,
   dataset,
   file,
-  path = here::here("data", dataset, file),
+  path = here::here("data-raw", fs::path_sanitize(dataset), fs::path_sanitize(file)),
   cache = TRUE
 )
 }
