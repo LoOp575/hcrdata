@@ -9,9 +9,9 @@
 #' @author Hisham Galal
 
 kobo.conn <- function() {
-  rvest::html_session("https://kobo.unhcr.org/token",
-                      httr::add_headers(
-                        Authorization = glue::glue("Token {Sys.getenv('KOBO_API_KEY')}")))
+  rvest::session("https://kobo.unhcr.org/token",
+                  httr::add_headers(
+                    Authorization = glue::glue("Token {Sys.getenv('KOBO_API_KEY')}")))
 }
 
 #' @name kobo.index
@@ -32,7 +32,7 @@ kobo.index <- function() {
     return(empty.index())
   }
 
-  r <- rvest::jump_to(r, "/api/v2/assets")
+  r <- rvest::session_jump_to(r, "/api/v2/assets")
 
   assets <-
     r$response %>%
@@ -41,7 +41,7 @@ kobo.index <- function() {
     purrr::keep(~.$asset_type == "survey") %>%
     purrr::map_dfr(~tibble::tibble(uid = purrr::pluck(., "uid"), dsname = purrr::pluck(., "name")))
 
-  r <- rvest::jump_to(r, "/exports")
+  r <- rvest::session_jump_to(r, "/exports")
 
   exports <-
     r$response %>%

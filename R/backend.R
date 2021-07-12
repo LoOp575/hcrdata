@@ -55,7 +55,7 @@ hcrindex <- function(cache = TRUE) {
 #'
 #' @author Hisham Galal
 hcrfetch <- function(src, dataset, file,
-                     path = here::here("data-raw", dataset, file),
+                     path = here::here("data-raw", fs::path_sanitize(dataset), fs::path_sanitize(file)),
                      cache = TRUE) {
   if(cache && fs::file_exists(path)) {
     return(path)
@@ -81,7 +81,7 @@ hcrfetch <- function(src, dataset, file,
       "mdl" = mdl.conn(),
       "ridl" = ridl.conn())
 
-  r <- r %>% rvest::jump_to(url, httr::write_disk(path, overwrite = TRUE))
+  r <- r %>% rvest::session_jump_to(url, httr::write_disk(path, overwrite = TRUE))
 
   if(httr::http_error(r$response)) {
     stop("File download failed - ", httr::http_status(r)$message)

@@ -9,9 +9,10 @@
 #' @author Hisham Galal
 
 ridl.conn <- function() {
-  rvest::html_session("https://ridl.unhcr.org/",
-                      httr::add_headers("X-CKAN-API-Key" = Sys.getenv("RIDL_API_KEY")))
+  rvest::session("https://ridl.unhcr.org/",
+                 httr::add_headers("X-CKAN-API-Key" = Sys.getenv("RIDL_API_KEY")))
 }
+
 #' @name ridl.index
 #' @rdname ridl.index
 #' @title  Get a list of projects in ridl http://ridl.unhcr.org
@@ -30,37 +31,35 @@ ridl.index <- function() {
     return(empty.index())
   }
 
-  # FIXME: Need a loop to retrieve more than the first 1000 datasets
-  r <- rvest::jump_to(r, "/api/3/action/package_search?rows=1000")
-
-  result <-
+  get_resources <- function(r) {
     r$response %>%
+      httr::content(as = "text") %>%
+      jsonlite::fromJSON() %>%
+      purrr::pluck("result", "results") %>%
+      tibble::as_tibble() %>%
+      dplyr::select(dsname = name, dsdesc = title, resources) %>%
+      tidyr::unnest(resources) %>%
+      dplyr::transmute(
+        srcname = "ridl", srcdesc = "Raw Internal Data Library",
+        dsname, dsdesc,
+        filename = fs::path_file(url), filedesc = filename,
+        url)
+  }
+
+  # FIXME: Need a loop to retrieve more than the first 1000 datasets
+  public <-
+    rvest::session_jump_to(r, "/api/3/action/package_search?q=visibility:public&rows=1000") %>%
+    get_resources()
+
+  private <-
+    rvest::session_jump_to(r, "/api/3/action/organization_list_for_user?permission=read") %>%
+    purrr::pluck("response") %>%
     httr::content(as = "text") %>%
     jsonlite::fromJSON() %>%
-    purrr::pluck("result", "results") %>%
-    tibble::as_tibble() %>%
-    dplyr::select(dsname = name, dsdesc = title, resources) %>%
-    tidyr::unnest(resources) %>%
-    dplyr::transmute(
-      srcname = "ridl", srcdesc = "Raw Internal Data Library",
-      dsname, dsdesc,
-      filename = fs::path_file(url), filedesc = filename,
-      url)
+    purrr::pluck("result") %>%
+    dplyr::pull(id) %>%
+    purrr::map_dfr(~rvest::session_jump_to(r, glue::glue("/api/3/action/package_search?q=owner_org:{.}&rows=1000")) %>%
+                     purrr::possibly(get_resources, tibble::tibble())())
 
-  # This is basically a poor-man's HEAD request since the API neither supports HEAD requests
-  # nor does it have any method for retrieving the list of datasets that a user has access to.
-  accessible <-
-    result %>%
-    dplyr::group_by(dsname) %>%
-    dplyr::summarize(
-      candownload =
-        purrr::quietly(rvest::jump_to)(r, dplyr::first(url), httr::add_headers(Range = "bytes=0-0")) %>%
-        purrr::pluck("result", "response") %>%
-        { purrr::negate(httr::http_error)(.) },
-      .groups = "drop") %>%
-    dplyr::filter(candownload)
-
-  result <- result %>% dplyr::semi_join(accessible, by = "dsname")
-
-  result
+  dplyr::bind_rows(private, public) %>% dplyr::distinct()
 }
